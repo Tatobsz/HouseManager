@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HouseManager.Aplicacao.Implemetacoes.Servicos;
 using HouseManager.Aplicacao.Interfaces.Servicos;
+using HouseManager.Infraestrutura.BancoDeDados;
 using HouseManager.Infraestrutura.Implemetacoes.Repositorios;
 using HouseManager.Infraestrutura.Interfaces.Repositorios;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,9 @@ namespace HouseManager.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProdutoServico, ProdutoServico>();
+
+            services.AddSingleton<Contexto>();
+
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 
             services.AddScoped<IUsuarioServico, UsuarioServico>();

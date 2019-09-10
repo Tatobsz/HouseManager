@@ -16,19 +16,29 @@ namespace HouseManager.Aplicacao.Implemetacoes.Servicos
             this.produtoRepositorio = produtoRepositorio;
         }
 
-        public List<Produto> ListAll()
+        public void InserirProduto(Produto produto)
         {
-            var produtos = new List<Produto>()
-            {
-                new Produto()
-            };
-
-            return produtos;
+            produtoRepositorio.IserirProduto(produto);
         }
 
-        public Produto Get()
+        public List<Produto> ListAll()
         {
-            return new Produto();
+            return produtoRepositorio.ListarProdutos();
+        }
+
+        public Produto Get(Guid id)
+        {
+            return produtoRepositorio.BuscarUmProduto(id);
+        }
+
+        public void Deletar(Guid id)
+        {
+            produtoRepositorio.DeletarProduto(id);
+        }
+
+        public void Alterar(Produto produto)
+        {
+            produtoRepositorio.AlterarProduto(produto);
         }
     }
 }

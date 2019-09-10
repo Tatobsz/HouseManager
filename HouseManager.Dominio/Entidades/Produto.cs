@@ -6,18 +6,10 @@ namespace HouseManager.Dominio.Entidades
 {
     public class Produto : EntidadeBase
     {
-        //Deve ter descrição
-        public String Descricao { get; private set; }
-
-        //Deve ser maior ou igual a data atual
-        public DateTime DataDeValidade { get; private set; }
-
-        //Tempo estimado não pode ser nulo, vazio ou menor do que 0;
-        public Int32 TempoEstimadoDeUso { get; private set; }
-
-        /*Trocar por uma classe*/
-        //Deve ter uma categoria
-        public String Categoria { get; private set; }
+        public String Descricao { get; [Sourceble] private set; }
+        public DateTime DataDeValidade { get; [Sourceble] private set; }
+        public Int32 TempoEstimadoDeUso { get; [Sourceble] private set; }
+        public String Categoria { get; [Sourceble] private set; }
 
         public Produto()
             : base(Guid.NewGuid())

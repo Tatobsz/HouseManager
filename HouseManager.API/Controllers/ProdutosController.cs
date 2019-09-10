@@ -2,9 +2,6 @@
 using HouseManager.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HouseManager.API.Controllers
 {
@@ -25,13 +22,38 @@ namespace HouseManager.API.Controllers
             return Ok(produtoServico.ListAll());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(string protegido)
+        [HttpPost]
+        public IActionResult Cadastrar([FromBody] Produto produto)
         {
-            if (protegido == null)
-                return BadRequest("Deu errado");
+            produtoServico.InserirProduto(produto);
+            return Ok();
+        }
 
-            return Ok("Chamou o id");
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
+        {
+            return Ok(produtoServico.Get(Guid.Parse(id)));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(string id)
+        {
+            produtoServico.Deletar(Guid.Parse(id));
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult Alterar([FromBody]Produto produto)
+        {
+            try
+            {
+                produtoServico.Alterar(produto);
+                return Ok("Produto alterado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
